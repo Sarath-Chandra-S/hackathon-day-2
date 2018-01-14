@@ -1,0 +1,39 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="shared-styles.html">
+
+<link rel="import" href="../bower_components/google-chart/google-chart.html">
+
+<dom-module id="book-lib-stats">
+    <template>
+        <style include="shared-styles">
+            :host {
+                display: block;
+                padding: 10px;
+            }
+        </style>
+        <div class="card">
+            <h1> Stats</h1>
+            <google-chart type='pie' options='{"title": "Fiction Books usage in the First Half of the Year 2017"}' cols='[{"label":"Month", "type":"string"}, {"label":"Days", "type":"number"}]'
+                rows='[["Jan", 31],["Feb", 28],["Mar", 31],["Apr",30],["May",31],["Jun",30]]'>
+            </google-chart>
+
+            <google-chart type='combo' options='{"title": "Fiction Books usage in the First Half of the Year 2017"}' cols='[{"label":"Month", "type":"string"}, {"label":"Days", "type":"number"}]'
+                rows='[["Jan", 31],["Feb", 28],["Mar", 31],["Apr",30],["May",31],["Jun",30]]'>
+            </google-chart>
+
+            <google-chart type='histogram' options='{"title": "Fiction Books usage in the First Half of the Year 2017"}' cols='[{"label":"Month", "type":"string"}, {"label":"Days", "type":"number"}]'
+                rows='[["Jan", 31],["Feb", 28],["Mar", 31],["Apr",30],["May",31],["Jun",30]]'>
+            </google-chart>
+
+
+        </div>
+    </template>
+    <script>
+        class BookLibStats extends Polymer.Element {
+            static get is() {
+                return "book-lib-stats";
+            }
+        }
+        window.customElements.define(BookLibStats.is, BookLibStats);
+    </script>
+</dom-module>

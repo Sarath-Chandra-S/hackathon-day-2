@@ -1,0 +1,87 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="shared-styles.html">
+
+<script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../bower_components/vaadin-grid/vaadin-grid.html">
+<link rel="import" href="../bower_components/vaadin-grid/vaadin-grid-selection-column.html">
+<link rel="import" href="../bower_components/vaadin-grid/vaadin-grid-sorter.html">
+
+<link rel="import" href="../bower_components/paper-button/paper-button.html" />
+
+<dom-module id="book-lib-all">
+    <template>
+        <style include="shared-styles">
+            :host {
+                display: block;
+                padding: 10px;
+            }
+
+            paper-button {
+                border: 1px solid grey;
+                border-radius: 0.8em;
+                padding: 5px;
+            }
+
+            #bookGrid {
+                height: 350px;
+            }
+        </style>
+
+        <div class="card">
+            <fieldset>
+                <legend>
+                    <h1>Books Available in the Library</h1>
+                </legend>
+                <iron-ajax auto url="https://demo.vaadin.com/demo-data/1.0/people?count=100" handle-as="json" last-response="{{users}}"></iron-ajax>
+
+                <vaadin-grid items="[[users.result]]" column-reordering-allowed multi-sort id="bookGrid">
+
+                    <vaadin-grid-selection-column auto-select frozen> </vaadin-grid-selection-column>
+
+                    <vaadin-grid-column width="9em" resizable>
+                        <template class="header">
+                            <vaadin-grid-sorter path="firstName">Book Name</vaadin-grid-sorter>
+                        </template>
+                        <template>[[item.firstName]]</template>
+                    </vaadin-grid-column>
+
+                    <vaadin-grid-column width="9em" resizable>
+                        <template class="header">
+                            <vaadin-grid-sorter path="lastName">Author Name</vaadin-grid-sorter>
+                        </template>
+                        <template>[[item.lastName]]</template>
+                    </vaadin-grid-column>
+
+                    <vaadin-grid-column width="15em" flex-grow="2" resizable>
+                        <template class="header">
+                            <vaadin-grid-sorter path="address.street">Description</vaadin-grid-sorter>
+                        </template>
+                        <template>[[item.address.street]], [[item.address.city]]</template>
+                    </vaadin-grid-column>
+                </vaadin-grid>
+            </fieldset>
+        </div>
+
+        <paper-button raised on-click="navigateToPrevState">
+                <div class="circle"><</div>
+        </paper-button>
+        <paper-button raised on-click="navigateToNextState"> Next
+        </paper-button>
+    </template>
+    <script>
+        class BookLibAll extends Polymer.Element {
+            static get is() {
+                return "book-lib-all";
+            }
+
+            navigateToPrevState(){
+                window.history.back();
+            }
+            navigateToNextState(){
+                window.history.pushState(null,"stats");
+            }
+        }
+        window.customElements.define(BookLibAll.is, BookLibAll);
+    </script>
+</dom-module>
