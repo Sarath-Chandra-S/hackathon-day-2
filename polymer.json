@@ -2,10 +2,10 @@
   "entrypoint": "index.html",
   "shell": "src/book-lib-app.html",
   "fragments": [
-    "src/book-lib-new.html",
-    "src/book-lib-popular.html",
-    "src/book-lib-genres.html",
-    "src/page-not-found.html"
+    "src/book-lib-get.html",
+    "src/book-lib-post.html",
+    "src/book-lib-stats.html",
+    "src/my-view404.html"
   ],
   "sources": [
     "src/**/*",
